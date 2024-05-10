@@ -1,0 +1,24 @@
+# use_frameworks!
+
+platform :ios, '13.0'
+
+target 'DDPresenter_Example' do
+  pod 'DDPresenter', :path => '../', :subspecs => ["Core", "NECollectionViewLayout", "CHTCollectionViewWaterfallLayout"]
+  
+  pod 'Service', :path => './Service'
+  pod 'AppStore', :path => './AppStore'
+  pod 'DouYin', :path => './DouYin'
+  pod 'TouTiao', :path => './TouTiao'
+  pod 'RedBook', :path => './RedBook'
+  pod 'WeChat', :path => './WeChat'
+  
+  pod 'SnapKit'
+  pod 'RandomColorSwift'
+  pod 'AHDownloadButton'
+  pod 'CHTCollectionViewWaterfallLayout'
+  pod 'NECollectionViewLayout', :git=>'https://github.com/djs66256/NECollectionViewLayout.git', :modular_headers => true
+
+  target 'DDPresenter_Tests' do
+    inherit! :search_paths
+  end
+end
