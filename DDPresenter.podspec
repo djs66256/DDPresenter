@@ -30,10 +30,11 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '13.0'
 
-  s.resource_bundles = {
-    'DDPresenter' => ['DDPresenter/Assets/*.png']
-  }
+#   s.resource_bundles = {
+#     'DDPresenter' => ['DDPresenter/Assets/*.png']
+#   }
 
+  s.swift_versions = '5.0'
   s.default_subspec = 'Core'
   
   s.subspec 'Core' do |ss|

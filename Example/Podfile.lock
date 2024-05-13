@@ -52,7 +52,7 @@ DEPENDENCIES:
   - DDPresenter/Core (from `../`)
   - DDPresenter/NECollectionViewLayout (from `../`)
   - DouYin (from `./DouYin`)
-  - NECollectionViewLayout (from `https://github.com/djs66256/NECollectionViewLayout.git`)
+  - NECollectionViewLayout
   - RandomColorSwift
   - RedBook (from `./RedBook`)
   - Service (from `./Service`)
@@ -64,6 +64,7 @@ SPEC REPOS:
   trunk:
     - AHDownloadButton
     - CHTCollectionViewWaterfallLayout
+    - NECollectionViewLayout
     - RandomColorSwift
     - SnapKit
 
@@ -74,8 +75,6 @@ EXTERNAL SOURCES:
     :path: "../"
   DouYin:
     :path: "./DouYin"
-  NECollectionViewLayout:
-    :git: https://github.com/djs66256/NECollectionViewLayout.git
   RedBook:
     :path: "./RedBook"
   Service:
@@ -85,16 +84,11 @@ EXTERNAL SOURCES:
   WeChat:
     :path: "./WeChat"
 
-CHECKOUT OPTIONS:
-  NECollectionViewLayout:
-    :commit: c81ac1b60ddb1f45151daef20613dc82523eec5f
-    :git: https://github.com/djs66256/NECollectionViewLayout.git
-
 SPEC CHECKSUMS:
   AHDownloadButton: f0778a7e406b49a590c48b241f1ff8e8f1cc5ab4
   AppStore: 42251c276fb6e0a00b9b5bca20fa6997ea643770
   CHTCollectionViewWaterfallLayout: b989a459788d7657ac010e03bc0f7eedca95a420
-  DDPresenter: ed33ba3dec7bd7441d8583b10e38f92ff989fe2a
+  DDPresenter: daabeb75a88c89bb7f16c09920e61cd56dcb739b
   DouYin: 1951aa5aba07b81b4ddb9a0486d3976a1a3422c3
   NECollectionViewLayout: c2cb01f051e6197cd2ae219140fffd0e1a5dbe2c
   RandomColorSwift: d18b9b025403137b5543a002187489b06cc1782b
@@ -104,6 +98,6 @@ SPEC CHECKSUMS:
   TouTiao: 52b70a07211b39e0997f4a653218c3c62277ac67
   WeChat: e6809c6cbf029623aed904a0a0cb0525525ac66f
 
-PODFILE CHECKSUM: ab62a6758e4b2a2ccaddede7fbda358f7dad4930
+PODFILE CHECKSUM: ed0219bd189d5ccc3cddba91e73dcfad4defa6ed
 
 COCOAPODS: 1.12.1

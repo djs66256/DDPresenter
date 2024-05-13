@@ -488,12 +488,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DDPresenter_Example/Pods-DDPresenter_Example-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/DDPresenter/DDPresenter.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit_Privacy.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DDPresenter.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SnapKit_Privacy.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

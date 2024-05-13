@@ -16,7 +16,7 @@ target 'DDPresenter_Example' do
   pod 'RandomColorSwift'
   pod 'AHDownloadButton'
   pod 'CHTCollectionViewWaterfallLayout'
-  pod 'NECollectionViewLayout', :git=>'https://github.com/djs66256/NECollectionViewLayout.git', :modular_headers => true
+  pod 'NECollectionViewLayout', :modular_headers => true
 
   target 'DDPresenter_Tests' do
     inherit! :search_paths
