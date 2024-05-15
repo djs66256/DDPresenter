@@ -6,7 +6,7 @@ A state-driven view system, with service and notification system. A power tool t
 pod 'DDPresenter'
 ```
 
-If using custom collection view layout, you can use subspecs. Now, support `NECollectionViewLayout`, `CHTCollectionViewWaterfallLayout`.
+Using custom collection view layout with subspecs. Now, support `NECollectionViewLayout`, `CHTCollectionViewWaterfallLayout`.
 ```ruby
 pod 'DDPresenter', :subspecs => ["Core", "NECollectionViewLayout", "CHTCollectionViewWaterfallLayout"]
 ```
@@ -15,7 +15,7 @@ pod 'DDPresenter', :subspecs => ["Core", "NECollectionViewLayout", "CHTCollectio
 
 ## Presenter
 
-You should put all states here to driven view updating.
+You should put all states here to drive view updating.
 1. You can trigger updating by define a state type:
 ```swift
 struct StateType {
@@ -94,7 +94,7 @@ func updateState() {
 
 #### Animations
 
-You can perform animations when udpating view.
+You can perform animations when updating view.
 
 ```
 setState { $0.normalProgress = 1 - $0.normalProgress } context: { context in
@@ -169,7 +169,7 @@ public enum NotifyScope {
 
 ## UICollectionView / UITableView
 
-`UICollectionView` / `UITableView` delegate by `Proxy`. It support many features:
+`UICollectionView` / `UITableView` delegate by `Proxy`. It supports many features:
 - data source diff
 - size caching and size calculating automatically
 - updating view only in the dirty part
@@ -190,7 +190,7 @@ And the same as `UITableView`:
 
 ### Custom UICollectionViewLayout
 
-When using custom `UICollectionViewLayout`, need use different presenters listed below:
+When custom `UICollectionViewLayout`, need different presenters listed below:
 
 | Layout         | UICollectionViewFlowLayout               | NECollectionViewLayout                    | CHTCollectionViewWaterfallLayout          |
 |----------------|------------------------------------------|-------------------------------------------|-------------------------------------------|
