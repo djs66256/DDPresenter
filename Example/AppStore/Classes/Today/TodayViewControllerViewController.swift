@@ -68,12 +68,18 @@ class TodayViewControllerViewController: UICollectionFlowPageViewController {
 //                return p
 //            }()
 //        ])
-        presenter.collectionViewPresenter.setSections([section])
+//        presenter.collectionViewPresenter.setSections([section])
         
         // Load data and update collection view
         getService(TodayDataLoaderService.self)?.loadData({ [weak self] data in
             guard let self else { return }
-            section.setItems(data.map { $0.buildPresenter() })
+            section.setItems(data.map { $0.buildPresenter() }) { [weak self] in
+                guard let self else { return }
+                // You should scroll to visible after update view
+                // section.typedItems[4].scrollToVisible(animated: true)
+            }
+            
+            presenter.collectionViewPresenter.setSections([section])
         })
     }
 

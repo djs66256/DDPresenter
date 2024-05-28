@@ -73,6 +73,7 @@ public struct ViewUpdateContext {
     
     public mutating func merge(_ context: ViewUpdateContext) {
         isDryRun = isDryRun || context.isDryRun
+        isBindingView = isBindingView || context.isBindingView
         invalidateConstraints = invalidateConstraints || context.invalidateConstraints
         invalidateLayout = invalidateLayout || context.invalidateLayout
         updateConstraintsIfNeeded = updateConstraintsIfNeeded || context.updateConstraintsIfNeeded

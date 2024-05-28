@@ -124,7 +124,7 @@ open class Presenter: Notifier, ServiceProvider, Hashable {
         }
         
         // Try auto bind view if needed.
-        if superPresenter.hasBoundView {
+        if superPresenter.hasBoundView, superPresenter.autoBindChildrenPresenterViews {
             tryAutoBindView()
         }
     }

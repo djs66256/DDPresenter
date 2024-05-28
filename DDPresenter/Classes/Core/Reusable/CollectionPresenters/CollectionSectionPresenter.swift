@@ -35,12 +35,6 @@ public protocol CollectionSectionPresentable: Presenter {
 /// SectionPresenter for view of collection type, like UITableView or UICollectionView.
 open class CollectionSectionPresenter<ItemType: Presenter>: ViewPresenter<Void>, CollectionSectionPresentable {
     
-    public override init() {
-        super.init()
-        autoBindView = false
-        autoBindChildrenPresenterViews = false
-    }
-    
     @MainActor public convenience init(items: [ItemType]) {
         self.init()
         self.items = items

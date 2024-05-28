@@ -30,12 +30,6 @@ public protocol CollectionPresentable: Presenter {
 }
 
 open class CollectionPresenter<View, SectionType: CollectionSectionPresentable>: ViewPresenter<View>, CollectionPresentable {
-    public override init() {
-        super.init()
-        
-        // Section presenters donot need bind view.
-        autoBindChildrenPresenterViews = false
-    }
     
     @MainActor private var _sections: [SectionType] = []
     @MainActor public var sections: [CollectionSectionPresentable] {

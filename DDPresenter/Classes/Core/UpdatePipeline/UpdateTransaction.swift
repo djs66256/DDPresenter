@@ -94,6 +94,16 @@ class CompositeTransaction {
         transactions.removeValue(forKey: Key(presenter: presenter))
     }
     
+    func remove(for presenter: Presenter, passing: (UpdateTransaction) -> Bool) -> UpdateTransaction? {
+        let key = Key(presenter: presenter)
+        if let transaction = transactions[key],
+           passing(transaction) {
+            transactions.removeValue(forKey: key)
+            return transaction
+        }
+        return nil
+    }
+    
     func merge(_ other: CompositeTransaction) {
         for (key, value) in other.transactions {
             if let my = self.transactions[key] {

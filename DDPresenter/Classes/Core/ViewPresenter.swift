@@ -66,8 +66,35 @@ open class ViewPresenter<View>: Presenter {
         StateContext.beginUpdate()
         updater()
         StateContext.endUpdate()
-        // Bind view do not need mark dirty, update immediately.
-        viewUpdatePipeline?.markDirty(presenter: self, context: ctx, completion)
+        
+        if let viewUpdatePipeline {
+            commitTransactionBeforeBindViewIfNeeded()
+            viewUpdatePipeline.markDirty(presenter: self, context: ctx, completion)
+        }
+        else {
+            saveTransactionBeforeBindViewIfNeeded(context: ctx, completion: completion)
+        }
+    }
+    
+    private var transactionBeforeBindView: UpdateTransaction?
+    
+    @MainActor func saveTransactionBeforeBindViewIfNeeded(context: ViewUpdateContext, completion: (() -> Void)?) {
+        let transaction = UpdateTransaction(presenter: self, context: context, completion: completion)
+        if let transactionBeforeBindView {
+            transactionBeforeBindView.merge(transaction)
+        }
+        else {
+            self.transactionBeforeBindView = transaction
+        }
+    }
+    
+    @MainActor func commitTransactionBeforeBindViewIfNeeded() {
+        if let viewUpdatePipeline, let transactionBeforeBindView {
+            viewUpdatePipeline.markDirty(presenter: transactionBeforeBindView.presenter,
+                                         context: transactionBeforeBindView.context,
+                                         { transactionBeforeBindView.complete() })
+            self.transactionBeforeBindView = nil
+        }
     }
     
     // MARK: - View

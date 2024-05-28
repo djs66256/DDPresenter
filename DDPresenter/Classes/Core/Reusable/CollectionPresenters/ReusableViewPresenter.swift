@@ -34,7 +34,9 @@ open class ReusableViewPresenterHolder: ViewPresenter<Void>, ReusableViewPresent
     
     public override init() {
         super.init()
-        autoBindView = false
+        
+        // Reusable presenter should bind customly.
+        autoBindChildrenPresenterViews = false
     }
     
     /// Reusable presenters maybe more than one. When UICollectionViewCell animating,

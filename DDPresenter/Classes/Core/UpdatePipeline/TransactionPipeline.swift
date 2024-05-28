@@ -47,21 +47,24 @@ class TransactionPipeline: ViewUpdatePipeline {
     func markDirty(presenter: Presenter, context: ViewUpdateContext, _ completion: (() -> Void)?) {
         guard !isDestroyed else { return }
         
-        if context.isBindingView {
-            presenter.updateView(context: context)
-            presenter.updateLayout(context: context)
-            completion?()
-            return
-        }
-        
         Logger.log("<TransactionPipeline> mark dirty: \(presenter), updating: \(isUpdating)")
         
         transaction.markDirty(presenter: presenter, context: context, completion)
         
         if !isUpdating {
-            // When during updating, should not mark dirty, as it will collect it immediately.
-            // Notify global pipeline to update it.
-            globalPipeline.markDirty(self)
+            // When bind view, update view immediately.
+            if context.isBindingView {
+                if let transaction = transaction.remove(for: presenter) {
+                    transaction.updateView()
+                    transaction.updateLayout()
+                    transaction.complete()
+                }
+            }
+            else {
+                // When during updating, should not mark dirty, as it will collect it immediately.
+                // Notify global pipeline to update it.
+                globalPipeline.markDirty(self)
+            }
         }
     }
     

@@ -70,21 +70,24 @@ extension Engine {
         func markDirty(presenter: Presenter, context: ViewUpdateContext, _ completion: (() -> Void)?) {
             guard !isDestroyed else { return }
             
-            if context.isBindingView {
-                presenter.updateView(context: context)
-                presenter.updateLayout(context: context)
-                completion?()
-                return
-            }
-            
             transaction.markDirty(presenter: presenter, context: context, completion)
             
             Logger.log("<PartialCompositeTrasaction> mark dirty: \(presenter), updating: \(isUpdating), invalidate data source: \(context.invalidateDataSource), invalidate content size: \(context.invalidateContentSize)")
             
             if !isUpdating {
-                // When during updating, should not mark dirty, as it will collect it immediately.
-                // Notify global pipeline to update it.
-                globalPipeline.markDirty(self)
+                // When bind view, update view immediately.
+                // We can only update view without reload data source in a UICollectionView/UITableView.
+                if context.isBindingView,
+                   let transaction = transaction.remove(for: presenter, passing: { !$0.context.invalidateDataSource }) {
+                    transaction.updateView()
+                    transaction.updateLayout()
+                    transaction.complete()
+                }
+                else {
+                    // When during updating, should not mark dirty, as it will collect it immediately.
+                    // Notify global pipeline to update it.
+                    globalPipeline.markDirty(self)
+                }
             }
         }
         
