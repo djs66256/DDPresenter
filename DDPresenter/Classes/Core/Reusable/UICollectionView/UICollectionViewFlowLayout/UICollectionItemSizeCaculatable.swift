@@ -29,11 +29,11 @@ public struct UICollectionItemFlowLayoutInfo: UICollectionViewLayoutInfo {
     }
     
     public enum SizeFitting {
-        case auto
-        case containerWidth
-        case containerHeight
-        case containerSize
-        case unlimited
+        case auto               // Using finity container width/height to make constraints
+        case containerWidth     // Using container width to make constraints
+        case containerHeight    // Using container height to make constraints
+        case containerSize      // Using container width and height to make constraints
+        case unlimited          // Do not make width and height constraints
     }
     
     /// calculate item size automatically, otherwise should override
@@ -42,6 +42,8 @@ public struct UICollectionItemFlowLayoutInfo: UICollectionViewLayoutInfo {
     
     /// Distinguish which algorithm to be used for auto calculation.
     public var layoutType: LayoutType = .autoLayout
+    
+    // SizeFitting defines the container size when using `autoLayout`
     public var autoLayoutSizeFitting: SizeFitting = .auto
     public init() {}
 }
