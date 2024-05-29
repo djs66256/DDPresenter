@@ -22,16 +22,6 @@
 
 import Foundation
 
-extension UICollectionItemFlowLayoutInfo.LayoutType {
-    var sizeCaculatorLayoutType : SizeCaculator.LayoutType {
-        switch self {
-        case .autoLayout: .autoLayout
-        case .sizeThatFits: .sizeThatFits
-        case .intrinsicContentSize: .intrinsicContentSize
-        }
-    }
-}
-
 open class UICollectionViewFlowLayoutProxy: UICollectionViewDelegateProxy, UICollectionViewDelegateFlowLayout {
     
     private var flowLayout: UICollectionViewFlowLayout? {

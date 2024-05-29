@@ -95,6 +95,8 @@ public class SizeCaculator {
             assert(false, "Can not support layout type \(layoutType).")
         }
         
+        assert(size.width.isFinite && size.height.isFinite, "Size is not a valid value.")
+        
         return size
     }
     
@@ -175,22 +177,26 @@ class AutoLayoutCaculator: SizeCaculatable {
         var activeConstraints: [NSLayoutConstraint] = []
         switch fitting {
         case .containerSize(let s):
-            let width = view.helperConstraints.lessThanWidth()
-            width.constant = s.width
-            width.isActive = true
-            let height = view.helperConstraints.lessThanHeight()
-            height.constant = s.height
-            height.isActive = true
-            activeConstraints.append(width)
-            activeConstraints.append(height)
+            if s.width.isFinite {
+                let width = view.helperConstraints.lessThanWidth()
+                width.constant = s.width
+                width.isActive = true
+                activeConstraints.append(width)
+            }
+            if s.height.isFinite {
+                let height = view.helperConstraints.lessThanHeight()
+                height.constant = s.height
+                height.isActive = true
+                activeConstraints.append(height)
+            }
         case .width(let w):
-            if let width = view.helperConstraints.equalToWidth(createIfNeeded: true) {
+            if w.isFinite, let width = view.helperConstraints.equalToWidth(createIfNeeded: true) {
                 width.constant = w
                 width.isActive = true
                 activeConstraints.append(width)
             }
         case .height(let h):
-            if let height = view.helperConstraints.equalToHeight(createIfNeeded: true) {
+            if h.isFinite, let height = view.helperConstraints.equalToHeight(createIfNeeded: true) {
                 height.constant = h
                 height.isActive = true
                 activeConstraints.append(height)

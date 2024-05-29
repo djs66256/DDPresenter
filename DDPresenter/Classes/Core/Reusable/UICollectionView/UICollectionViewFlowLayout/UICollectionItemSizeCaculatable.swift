@@ -28,12 +28,21 @@ public struct UICollectionItemFlowLayoutInfo: UICollectionViewLayoutInfo {
         case autoLayout, sizeThatFits, intrinsicContentSize
     }
     
+    public enum SizeFitting {
+        case auto
+        case containerWidth
+        case containerHeight
+        case containerSize
+        case unlimited
+    }
+    
     /// calculate item size automatically, otherwise should override
     /// `func calculateSize(containerSize: CGSize) -> CGSize` to calculate manually
     public var calculateSizeAutomatically: Bool = true
     
     /// Distinguish which algorithm to be used for auto calculation.
     public var layoutType: LayoutType = .autoLayout
+    public var autoLayoutSizeFitting: SizeFitting = .auto
     public init() {}
 }
 

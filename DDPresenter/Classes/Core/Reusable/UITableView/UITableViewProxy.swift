@@ -32,6 +32,20 @@ extension UITableViewCellLayoutInfo.LayoutType {
     }
 }
 
+extension UITableViewCellLayoutInfo.SizeFitting {
+    func fitting(with containerSize: CGSize) -> Fitting {
+        let fitting: Fitting
+        switch self {
+        case .auto: fitting = .init(width: containerSize.width, height: containerSize.height)
+        case .containerWidth: fitting = .width(containerSize.width)
+        case .containerHeight: fitting = .height(containerSize.height)
+        case .containerSize: fitting = .containerSize(containerSize)
+        case .unlimited: fitting = .containerSize(CGSize(width: CGFloat.infinity, height: CGFloat.infinity))
+        }
+        return fitting
+    }
+}
+
 @MainActor
 public class UITableViewDelegateProxy: NSObject, UpdatePipelineInvalidateContentSizeProtocol {
     
@@ -556,7 +570,7 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
                                               presenter: ReusablePresentable,
                                               view: UIView,
                                               layoutType: SizeCaculator.LayoutType,
-                                              in containerSize: CGSize) -> CGSize {
+                                              fitting: Fitting) -> CGSize {
         var size: CGSize = .zero
         presenter.prepareForReuse()
         caculatorRootPresenter.bindReusablePresenter(presenter)
@@ -590,12 +604,13 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
         if holder.usingReusablePresenterLayoutInfo {
             if cellPresenter.layoutInfo.calculateSizeAutomatically {
                 let layoutType = cellPresenter.layoutInfo.layoutType.sizeCaculatorLayoutType
+                let fitting = cellPresenter.layoutInfo.autoLayoutSizeFitting.fitting(with: containerSize)
                 let cell = sizeCalculator.dequeueView(for: viewClass)
                 return doCalculateSizeAutomatically(for: holder,
                                                     presenter: cellPresenter,
                                                     view: cell,
                                                     layoutType: layoutType,
-                                                    in: containerSize)
+                                                    fitting: fitting)
             }
             else {
                 return doCalculateSizeManually(for: holder, presenter: cellPresenter, in: containerSize)
@@ -605,12 +620,13 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
             let calcultor = holder
             if calcultor.layoutInfo.calculateSizeAutomatically {
                 let layoutType = calcultor.layoutInfo.layoutType.sizeCaculatorLayoutType
+                let fitting = cellPresenter.layoutInfo.autoLayoutSizeFitting.fitting(with: containerSize)
                 let cell = sizeCalculator.dequeueView(for: viewClass)
                 return doCalculateSizeAutomatically(for: holder,
                                                     presenter: cellPresenter,
                                                     view: cell,
                                                     layoutType: layoutType,
-                                                    in: containerSize)
+                                                    fitting: fitting)
             } else {
                 let height = calcultor.calculateHeight(containerSize: containerSize)
                 return CGSize(width: containerSize.width, height: height)
