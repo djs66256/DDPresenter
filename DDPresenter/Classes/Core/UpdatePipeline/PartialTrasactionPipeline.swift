@@ -332,7 +332,8 @@ extension Engine {
             let context = transaction.invalidateContentSizeContext
             
             performBatchUpdates(with: context, synchronize: synchronize) {
-                self.listView.invalidateLayout()
+                self.listView.invalidateLayout()    // Better to invalidate size of items if needed
+                self.listView.layoutIfNeeded()      // Force layout in batch updates, otherwise it may crash.
                 transaction.updateLayout()
             } completion: {
                 transaction.complete()
