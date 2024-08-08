@@ -89,9 +89,9 @@ public class UITableViewDelegateProxy: NSObject, UpdatePipelineInvalidateContent
         self.registrar = Engine.UITableViewCellRegistrar(tableView: tableView)
         super.init()
         self.updater.invalidation = self
+        scrollDelegate = tableView.delegate
         tableView.delegate = self
         tableView.dataSource = self
-        scrollDelegate = tableView.delegate
     }
     
     func invalidateContentSize(_ pipeline: ViewUpdatePipeline, _ presenters: [Presenter]) {
