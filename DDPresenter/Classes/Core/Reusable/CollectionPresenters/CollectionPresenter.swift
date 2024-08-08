@@ -53,7 +53,10 @@ open class CollectionPresenter<View, SectionType: CollectionSectionPresentable>:
         }
         _sections = sections
         for section in sections {
-            add(child: section)
+            // Only new section needs adding child.
+            if section.superPresenter !== self {
+                add(child: section)
+            }
         }
         setState(updater: {}, context: {
             $0.reloadData()

@@ -70,7 +70,10 @@ open class CollectionSectionPresenter<ItemType: Presenter>: ViewPresenter<Void>,
         }
         // Add new items to children, do nothing if already in chidren.
         for item in _items {
-            add(child: item)
+            // Only new item needs adding child.
+            if item.superPresenter !== self {
+                add(child: item)
+            }
         }
         setState(updater: {}, context: {
             $0.reloadData()
@@ -116,7 +119,10 @@ open class CollectionSectionPresenter<ItemType: Presenter>: ViewPresenter<Void>,
         }
         // Add new supplementaries to children, do nothing if already in chidren.
         for supplementary in supplementaries {
-            add(child: supplementary)
+            // Only new supplementary needs adding child.
+            if supplementary.superPresenter !== self {
+                add(child: supplementary)
+            }
         }
         setState(updater: {
             self._supplementaries[kind] = supplementaries
