@@ -74,6 +74,13 @@ extension Engine {
             
             Logger.log("<PartialCompositeTrasaction> mark dirty: \(presenter), updating: \(isUpdating), invalidate data source: \(context.invalidateDataSource), invalidate content size: \(context.invalidateContentSize)")
             
+            // We use dirtyVersion to figure out whether dirty during async updating.
+            if context.invalidateDataSource {
+                withLock {
+                    dirtyVersion += 1
+                }
+            }
+            
             if !isUpdating {
                 // When bind view, update view immediately.
                 // We can only update view without reload data source in a UICollectionView/UITableView.
@@ -113,11 +120,6 @@ extension Engine {
             if transaction.invalidateDataSource {
                 guard let newData = collectNewDataSource() else { return }
                 let oldData = dataSource
-                
-                // We use dirtyVersion to figure out whether dirty during async updating.
-                withLock {
-                    dirtyVersion += 1
-                }
                 
                 if oldData.sections.isEmpty || newData.sections.isEmpty {
                     Logger.log("<PartialCompositeTrasaction> update view: reload data without differ")
@@ -244,6 +246,7 @@ extension Engine {
                 let originDirtyVersion = withLock { dirtyVersion }
                 queue.async { [weak self] in
                     guard let self, self.withLock({ self.dirtyVersion == originDirtyVersion }) else {
+                        Logger.log("<PartialCompositeTrasaction> cancel updating view: reload data with differ")
                         completion(false)
                         return
                     }
@@ -252,6 +255,7 @@ extension Engine {
                     
                     DispatchQueue.main.async { [weak self] in
                         guard let self, self.withLock({ self.dirtyVersion == originDirtyVersion }) else {
+                            Logger.log("<PartialCompositeTrasaction> cancel updating view: reload data with differ")
                             completion(false)
                             return
                         }
