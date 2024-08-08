@@ -370,7 +370,7 @@ extension UICollectionViewDelegateProxy: UIScrollViewDelegate {
     
     @available(iOS 2.0, *)
     open func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        scrollDelegate?.scrollViewWillBeginDragging?(scrollView)
+        scrollDelegate?.scrollViewWillBeginDecelerating?(scrollView)
     }
     
     @available(iOS 2.0, *)
