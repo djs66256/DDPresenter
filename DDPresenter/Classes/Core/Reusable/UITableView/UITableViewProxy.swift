@@ -89,9 +89,9 @@ public class UITableViewDelegateProxy: NSObject, UpdatePipelineInvalidateContent
         self.registrar = Engine.UITableViewCellRegistrar(tableView: tableView)
         super.init()
         self.updater.invalidation = self
+        scrollDelegate = tableView.delegate
         tableView.delegate = self
         tableView.dataSource = self
-        scrollDelegate = tableView.delegate
     }
     
     func invalidateContentSize(_ pipeline: ViewUpdatePipeline, _ presenters: [Presenter]) {
@@ -957,3 +957,85 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
 //    optional func tableView(_ tableView: UITableView, willEndContextMenuInteraction configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?)
 }
 
+extension UITableViewDelegateProxy: UIScrollViewDelegate {
+    @available(iOS 2.0, *)
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidScroll?(scrollView)
+    }
+    
+    @available(iOS 3.2, *)
+    open func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidZoom?(scrollView)
+    }
+    
+    
+    // called on start of dragging (may require some time and or distance to move)
+    @available(iOS 2.0, *)
+    open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewWillBeginDragging?(scrollView)
+    }
+    
+    // called on finger up if the user dragged. velocity is in points/millisecond. targetContentOffset may be changed to adjust where the scroll view comes to rest
+    @available(iOS 5.0, *)
+    open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        scrollDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+    }
+    
+    // called on finger up if the user dragged. decelerate is true if it will continue moving afterwards
+    @available(iOS 2.0, *)
+    open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        scrollDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
+    }
+    
+    
+    @available(iOS 2.0, *)
+    open func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewWillBeginDecelerating?(scrollView)
+    }
+    
+    @available(iOS 2.0, *)
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidEndDecelerating?(scrollView)
+    }
+    
+    
+    @available(iOS 2.0, *)
+    open func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
+    }
+    
+    
+    @available(iOS 2.0, *)
+    open func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        scrollDelegate?.viewForZooming?(in: scrollView)
+    }
+    
+    @available(iOS 3.2, *)
+    open func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
+    }
+    
+    @available(iOS 2.0, *)
+    open func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        scrollDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
+    }
+    
+    
+    @available(iOS 2.0, *)
+    open func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? false
+    }
+    
+    @available(iOS 2.0, *)
+    open func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidScrollToTop?(scrollView)
+    }
+    
+    
+    /* Also see -[UIScrollView adjustedContentInsetDidChange]
+     */
+    @available(iOS 11.0, *)
+    open func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidChangeAdjustedContentInset?(scrollView)
+    }
+}
