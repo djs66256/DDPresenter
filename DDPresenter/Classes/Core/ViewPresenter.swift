@@ -76,10 +76,32 @@ open class ViewPresenter<View>: Presenter {
         }
     }
     
-    private var transactionBeforeBindView: UpdateTransaction?
+    @MainActor
+    private class BeforeBindViewUpdateTransaction {
+        var context: ViewUpdateContext
+        var completions: [() -> Void] = []
+        
+        init(context: ViewUpdateContext, completion: (() -> Void)?) {
+            self.context = context
+            self.completions = { if let completion { return [completion] } else { return [] } }()
+        }
+        
+        func merge(_ other: BeforeBindViewUpdateTransaction) {
+            self.context.merge(other.context)
+            self.completions.append(contentsOf: other.completions)
+        }
+        
+        func complete() {
+            for completion in completions {
+                completion()
+            }
+        }
+    }
+    
+    private var transactionBeforeBindView: BeforeBindViewUpdateTransaction?
     
     @MainActor func saveTransactionBeforeBindViewIfNeeded(context: ViewUpdateContext, completion: (() -> Void)?) {
-        let transaction = UpdateTransaction(presenter: self, context: context, completion: completion)
+        let transaction = BeforeBindViewUpdateTransaction(context: context, completion: completion)
         if let transactionBeforeBindView {
             transactionBeforeBindView.merge(transaction)
         }
@@ -90,7 +112,7 @@ open class ViewPresenter<View>: Presenter {
     
     @MainActor func commitTransactionBeforeBindViewIfNeeded() {
         if let viewUpdatePipeline, let transactionBeforeBindView {
-            viewUpdatePipeline.markDirty(presenter: transactionBeforeBindView.presenter,
+            viewUpdatePipeline.markDirty(presenter: self,
                                          context: transactionBeforeBindView.context,
                                          { transactionBeforeBindView.complete() })
             self.transactionBeforeBindView = nil
