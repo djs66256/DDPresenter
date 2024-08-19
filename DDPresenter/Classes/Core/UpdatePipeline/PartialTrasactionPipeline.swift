@@ -121,6 +121,11 @@ extension Engine {
                 guard let newData = collectNewDataSource() else { return }
                 let oldData = dataSource
                 
+                // We use dirtyVersion to figure out whether dirty during async updating.
+                withLock {
+                    dirtyVersion += 1
+                }
+                
                 if oldData.sections.isEmpty || newData.sections.isEmpty {
                     Logger.log("<PartialCompositeTrasaction> update view: reload data without differ")
                     doReloadDataSourceWithoutDiff(oldData: oldData, newData: newData, synchronize: synchronize)
