@@ -33,7 +33,7 @@ public protocol UITableViewPresentable: CollectionPresentable {
 
 open class UITableViewPresenter<V: UITableView>: CollectionPresenter<V, UITableViewSectionPresenter>, UITableViewPresentable {
     
-    @MainActor public var scrollDelegate: UIScrollViewDelegate? {
+    @MainActor public weak var scrollDelegate: UIScrollViewDelegate? {
         didSet { proxy?.scrollDelegate = scrollDelegate }
     }
     

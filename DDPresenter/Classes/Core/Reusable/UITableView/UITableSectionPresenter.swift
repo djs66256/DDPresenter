@@ -51,6 +51,12 @@ public extension UITableViewSectionPresenter {
         }
     }
     
+    @MainActor func setHeader(_ newValue: UITableViewReusablePresenterHolder,
+                              animated: Bool = false,
+                              completion: (()->Void)? = nil) {
+        setSupplementary(CollectionElementKind.sectionHeader, [newValue], animated: animated, completion: completion)
+    }
+    
     @MainActor var footer: UITableViewReusablePresenterHolder? {
         get {
             typedSupplementaries[CollectionElementKind.sectionFooter]?.first
@@ -63,5 +69,11 @@ public extension UITableViewSectionPresenter {
                 removeSupplementary(CollectionElementKind.sectionFooter)
             }
         }
+    }
+    
+    @MainActor func setFooter(_ newValue: UITableViewReusablePresenterHolder,
+                              animated: Bool = false,
+                              completion: (()->Void)? = nil) {
+        setSupplementary(CollectionElementKind.sectionFooter, [newValue], animated: animated, completion: completion)
     }
 }

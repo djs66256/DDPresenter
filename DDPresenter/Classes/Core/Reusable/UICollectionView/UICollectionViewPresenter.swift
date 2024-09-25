@@ -36,7 +36,7 @@ open class UICollectionViewPresenter<V: UICollectionView, SectionType: UICollect
     
     public var defaultLayoutProxyType: UICollectionViewDelegateProxy.Type?
     
-    @MainActor public var scrollDelegate: UIScrollViewDelegate? {
+    @MainActor public weak var scrollDelegate: UIScrollViewDelegate? {
         didSet { proxy?.scrollDelegate = scrollDelegate }
     }
     
