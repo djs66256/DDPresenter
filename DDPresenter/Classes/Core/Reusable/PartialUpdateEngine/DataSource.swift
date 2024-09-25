@@ -42,6 +42,17 @@ extension Engine {
             var presenter: Presenter
             let items: [Item]
             let supplementaries: [String: [Item]]
+            
+            func areSupplementariesEquals(_ other: Section) -> Bool {
+                guard self.supplementaries.count == other.supplementaries.count else {
+                    return false
+                }
+                return self.supplementaries.elementsEqual(other.supplementaries, by: {
+                    $0.value.elementsEqual($1.value) {
+                        $0.presenter === $1.presenter
+                    }
+                })
+            }
         }
         
         init(root: CollectionPresentable) {

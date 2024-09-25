@@ -34,6 +34,7 @@ extension Engine {
             
             var inserts: IndexSet = IndexSet()
             var deletes: IndexSet = IndexSet()
+            var reloads: IndexSet = IndexSet()
             var moves: [Move] = []
             
             var hasChanges: Bool {

@@ -16,6 +16,8 @@ class AutoSizeForSizeThatFitCell: UICollectionViewCell {
         super.init(frame: frame)
 
         backgroundColor = .systemGreen
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.black.cgColor
     }
 
     required init?(coder _: NSCoder) {

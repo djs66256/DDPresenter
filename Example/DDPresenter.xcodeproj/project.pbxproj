@@ -21,6 +21,11 @@
 		65119A722BEDE3D50007C08A /* MyNotificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65119A6F2BEDE3D50007C08A /* MyNotificationPresenter.swift */; };
 		65119A732BEDE3D50007C08A /* MyNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65119A702BEDE3D50007C08A /* MyNotificationViewController.swift */; };
 		65119A742BEDE3D50007C08A /* MyNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65119A712BEDE3D50007C08A /* MyNotificationView.swift */; };
+		653B95122CA2E9AA00987473 /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653B95112CA2E9AA00987473 /* HeaderFooterViewController.swift */; };
+		653B95152CA2E9BF00987473 /* HeaderAPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653B95132CA2E9BF00987473 /* HeaderAPresenter.swift */; };
+		653B95162CA2E9BF00987473 /* HeaderAReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653B95142CA2E9BF00987473 /* HeaderAReusableView.swift */; };
+		653B95192CA2E9CC00987473 /* HeaderBPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653B95172CA2E9CC00987473 /* HeaderBPresenter.swift */; };
+		653B951A2CA2E9CC00987473 /* HeaderBReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653B95182CA2E9CC00987473 /* HeaderBReusableView.swift */; };
 		65A781D42BF2096800599D2B /* UICollectionViewDiffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A781D32BF2096800599D2B /* UICollectionViewDiffViewController.swift */; };
 		65A781D62BF2097A00599D2B /* UICollectionViewAutoSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A781D52BF2097A00599D2B /* UICollectionViewAutoSizeViewController.swift */; };
 		65A781D92BF209E800599D2B /* AutoSizeForAutoLayoutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A781D72BF209E800599D2B /* AutoSizeForAutoLayoutPresenter.swift */; };
@@ -83,6 +88,11 @@
 		65119A6F2BEDE3D50007C08A /* MyNotificationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyNotificationPresenter.swift; path = ViewPresenter/Notification/MyNotificationPresenter.swift; sourceTree = "<group>"; };
 		65119A702BEDE3D50007C08A /* MyNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyNotificationViewController.swift; path = ViewPresenter/Notification/MyNotificationViewController.swift; sourceTree = "<group>"; };
 		65119A712BEDE3D50007C08A /* MyNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyNotificationView.swift; path = ViewPresenter/Notification/MyNotificationView.swift; sourceTree = "<group>"; };
+		653B95112CA2E9AA00987473 /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
+		653B95132CA2E9BF00987473 /* HeaderAPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderAPresenter.swift; sourceTree = "<group>"; };
+		653B95142CA2E9BF00987473 /* HeaderAReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderAReusableView.swift; sourceTree = "<group>"; };
+		653B95172CA2E9CC00987473 /* HeaderBPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBPresenter.swift; sourceTree = "<group>"; };
+		653B95182CA2E9CC00987473 /* HeaderBReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBReusableView.swift; sourceTree = "<group>"; };
 		65A781D32BF2096800599D2B /* UICollectionViewDiffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UICollectionViewDiffViewController.swift; path = UICollectionView/Diff/UICollectionViewDiffViewController.swift; sourceTree = "<group>"; };
 		65A781D52BF2097A00599D2B /* UICollectionViewAutoSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UICollectionViewAutoSizeViewController.swift; path = UICollectionView/AutoSize/UICollectionViewAutoSizeViewController.swift; sourceTree = "<group>"; };
 		65A781D72BF209E800599D2B /* AutoSizeForAutoLayoutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoSizeForAutoLayoutPresenter.swift; path = UICollectionView/AutoSize/AutoSizeForAutoLayoutPresenter.swift; sourceTree = "<group>"; };
@@ -217,6 +227,18 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		653B95102CA2E99D00987473 /* HeaderFooter */ = {
+			isa = PBXGroup;
+			children = (
+				653B95112CA2E9AA00987473 /* HeaderFooterViewController.swift */,
+				653B95132CA2E9BF00987473 /* HeaderAPresenter.swift */,
+				653B95142CA2E9BF00987473 /* HeaderAReusableView.swift */,
+				653B95172CA2E9CC00987473 /* HeaderBPresenter.swift */,
+				653B95182CA2E9CC00987473 /* HeaderBReusableView.swift */,
+			);
+			path = HeaderFooter;
+			sourceTree = "<group>";
+		};
 		65A781D22BF2091D00599D2B /* Diff */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +285,7 @@
 		65C6972F2BEB597800BD15CC /* UICollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				653B95102CA2E99D00987473 /* HeaderFooter */,
 				65A781D22BF2091D00599D2B /* Diff */,
 				65C697362BEB59D700BD15CC /* AutoSize */,
 			);
@@ -534,6 +557,7 @@
 				65A781EE2BF2183600599D2B /* UITableViewAutoSizeViewControllerViewController.swift in Sources */,
 				65C697412BEDC4C700BD15CC /* MyServicePresenter.swift in Sources */,
 				65C697422BEDC4C700BD15CC /* MyServiceViewController.swift in Sources */,
+				653B95122CA2E9AA00987473 /* HeaderFooterViewController.swift in Sources */,
 				65A781F02BF2184500599D2B /* UITableViewDiffViewControllerViewController.swift in Sources */,
 				65119A6D2BEDCEF30007C08A /* MyAnimationViewController.swift in Sources */,
 				65A782002BF2189B00599D2B /* TableAutoSizeForSizeThatFitTableCell.swift in Sources */,
@@ -542,14 +566,17 @@
 				607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */,
 				65A781E52BF215DA00599D2B /* DiffBlockPresenter.swift in Sources */,
 				65C697472BEDC60200BD15CC /* MyDirtyService.swift in Sources */,
+				653B95192CA2E9CC00987473 /* HeaderBPresenter.swift in Sources */,
 				65119A6C2BEDCEF30007C08A /* MyAnimationPresenter.swift in Sources */,
 				65A781F42BF2186900599D2B /* TableDiffBlockTableCell.swift in Sources */,
 				65A781E12BF20AB900599D2B /* AutoSizeForIntrinsicContentSizePresenter.swift in Sources */,
 				65119A6E2BEDCEF30007C08A /* MyAnimationView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				653B95162CA2E9BF00987473 /* HeaderAReusableView.swift in Sources */,
 				65A781D92BF209E800599D2B /* AutoSizeForAutoLayoutPresenter.swift in Sources */,
 				65A781FF2BF2189B00599D2B /* TableAutoSizeForSizeThatFitPresenter.swift in Sources */,
 				65A781DD2BF20A0000599D2B /* AutoSizeForSizeThatFitPresenter.swift in Sources */,
+				653B95152CA2E9BF00987473 /* HeaderAPresenter.swift in Sources */,
 				65A781DA2BF209E800599D2B /* AutoSizeForAutoLayoutCell.swift in Sources */,
 				65119A732BEDE3D50007C08A /* MyNotificationViewController.swift in Sources */,
 				65A781F72BF2187E00599D2B /* TableAutoSizeForAutoLayoutPresenter.swift in Sources */,
@@ -561,6 +588,7 @@
 				65A781D42BF2096800599D2B /* UICollectionViewDiffViewController.swift in Sources */,
 				65A781F32BF2186900599D2B /* TableDiffBlockPresenter.swift in Sources */,
 				2BF90ECA27D9D47000F5017C /* FunctionViewController.swift in Sources */,
+				653B951A2CA2E9CC00987473 /* HeaderBReusableView.swift in Sources */,
 				65A781E22BF20AB900599D2B /* AutoSizeForIntrinsicContentSizeCell.swift in Sources */,
 				65A781FC2BF2188C00599D2B /* TableAutoSizeForIntrinsicContentSizeTableCell.swift in Sources */,
 				65A781FB2BF2188C00599D2B /* TableAutoSizeForIntrinsicContentSizePresenter.swift in Sources */,

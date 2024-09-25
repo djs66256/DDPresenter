@@ -89,6 +89,9 @@ extension Engine {
             for move in sectionDiffer.moves {
                 collectionView.moveSection(move.from, toSection: move.to)
             }
+            if !sectionDiffer.reloads.isEmpty {
+                collectionView.reloadSections(sectionDiffer.reloads)
+            }
         }
         
     }
@@ -146,6 +149,9 @@ extension Engine {
             }
             for move in sectionDiffer.moves {
                 tableView.moveSection(move.from, toSection: move.to)
+            }
+            if !sectionDiffer.reloads.isEmpty {
+                tableView.reloadSections(sectionDiffer.reloads, with: .none)
             }
         }
     }

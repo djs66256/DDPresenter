@@ -282,7 +282,7 @@ extension Engine {
         
         private func doDiff(oldData: Engine.DataSource, newData: Engine.DataSource) -> DiffResult {
             let differ = Differ()
-            let sectionResult = differ.diff(old: oldData.sections,
+            var sectionResult = differ.diff(old: oldData.sections,
                                             new: newData.sections)
             var itemResults: [Differ.IndexPathDiffResult] = []
             for (newIndex, newSection) in newData.sections.enumerated() {
@@ -295,6 +295,18 @@ extension Engine {
                     itemResults.append(itemResult)
                 }
             }
+            
+            var reloads = IndexSet()
+            for (newIndex, newSection) in newData.sections.enumerated() {
+                if let oldIndex = sectionResult.oldIndex(of: newSection) {
+                    let oldSection = oldData.sections[oldIndex]
+                    if !oldSection.areSupplementariesEquals(newSection) {
+                        reloads.insert(newIndex)
+                    }
+                }
+            }
+            sectionResult.reloads = reloads
+            
             return DiffResult(oldData: oldData,
                               newData: newData,
                               sectionResult: sectionResult,

@@ -113,6 +113,7 @@ class MainViewController: UITablePageDefaultViewController {
                 let section = UITableViewSectionPresenter()
                 section.headerTitle = "UICollectionView Test"
                 section.setItems([
+                    CellPresenter(name: "UICollectionView header", viewController: { HeaderFooterViewController() }, action: nil),
                     CellPresenter(name: "UICollectionView cell auto size", viewController: { UICollectionViewAutoSizeViewController() }, action: nil),
                     CellPresenter(name: "UICollectionView data source diff", viewController: { UICollectionViewDiffViewController() }, action: nil),
                 ])
