@@ -30,7 +30,10 @@ class HeaderFooterViewController: UICollectionFlowPageViewController {
         presenter.collectionViewPresenter.setSections([section, section2])
         section.items = [AutoSizeForSizeThatFitPresenter(), AutoSizeForSizeThatFitPresenter()]
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Switch", style: .plain, target: self, action: #selector(self.onSwitch))
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(title: "Switch", style: .plain, target: self, action: #selector(self.onSwitch)),
+            UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(self.onUpdate)),
+        ]
     }
 
     var headerTag: Bool = false
@@ -46,6 +49,14 @@ class HeaderFooterViewController: UICollectionFlowPageViewController {
             section.items.append(AutoSizeForSizeThatFitPresenter())
         } else {
             section.items.removeLast()
+        }
+    }
+    
+    var textTag: Bool = false
+    @objc func onUpdate() {
+        textTag.toggle()
+        if let header = section.header as? HeaderAPresenter {
+            header.state.text = textTag ? "Header A true": "Header A false"
         }
     }
 }

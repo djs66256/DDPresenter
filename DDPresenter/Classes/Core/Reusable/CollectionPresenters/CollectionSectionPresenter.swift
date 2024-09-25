@@ -112,7 +112,7 @@ open class CollectionSectionPresenter<ItemType: Presenter>: ViewPresenter<Void>,
         let newSet = Set(supplementaries.map({ ObjectIdentifier($0) }))
         if let olds = _supplementaries[kind] {
             for old in olds {
-                if newSet.contains(ObjectIdentifier(old)) {
+                if !newSet.contains(ObjectIdentifier(old)) {
                     remove(child: old)
                 }
             }
