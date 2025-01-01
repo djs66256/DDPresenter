@@ -646,7 +646,7 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
                 return calculatedSize.height
             }
         }
-        return UITableView.automaticDimension
+        return tableView.rowHeight
     }
     
     @available(iOS 2.0, *)
@@ -666,7 +666,7 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
                 return UITableView.automaticDimension
             }
         }
-        return 0
+        return tableView.sectionHeaderHeight
     }
     
     @available(iOS 2.0, *)
@@ -686,7 +686,7 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
                 return UITableView.automaticDimension
             }
         }
-        return 0
+        return tableView.sectionFooterHeight
     }
     
     @available(iOS 7.0, *)
@@ -694,7 +694,7 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
         if let presenter: UITableViewCellPresentable = dataSource.item(at: indexPath) {
             return presenter.estimatedHeight
         }
-        return 0
+        return tableView.estimatedRowHeight
     }
     
     @available(iOS 7.0, *)
@@ -707,7 +707,7 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
                 return UITableView.automaticDimension
             }
         }
-        return 0
+        return tableView.estimatedSectionHeaderHeight
     }
     
     @available(iOS 7.0, *)
@@ -720,7 +720,7 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
                 return UITableView.automaticDimension
             }
         }
-        return 0
+        return tableView.estimatedSectionFooterHeight
     }
     
 //    @available(iOS 8.0, *)
