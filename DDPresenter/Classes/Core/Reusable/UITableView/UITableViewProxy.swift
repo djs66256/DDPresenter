@@ -55,7 +55,9 @@ public class UITableViewDelegateProxy: NSObject, UpdatePipelineInvalidateContent
     var registrar: Engine.UITableViewCellRegistrar
     var sizeCalculator = SizeCaculator()
     var sizeCache = SizeCache()
-    
+
+    private var editingItem: UITableViewCellPresentable?
+
     var updatePipline: ViewUpdatePipeline {
         updater
     }
@@ -484,15 +486,17 @@ extension UITableViewDelegateProxy: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         if let item: UITableViewCellPresentable = dataSource.item(at: indexPath) {
             item.onWillBeginEditing()
+            editingItem = item
+        } else {
+            editingItem = nil
         }
     }
     
     @available(iOS 8.0, *)
     public func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-        if let indexPath,
-           let item: UITableViewCellPresentable = dataSource.item(at: indexPath) {
-            item.onDidEndEditing()
-        }
+        // End editing, item at indexPath may has already changed, so we need store it.
+        // For example, when deleting, item at indexPath is gone at end of editing.
+        editingItem?.onDidEndEditing()
     }
     
     
