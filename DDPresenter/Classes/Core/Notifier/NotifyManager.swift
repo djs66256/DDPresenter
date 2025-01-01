@@ -71,8 +71,8 @@ public final class NotifyManager: NotifyRegistrar {
     }
     
     @MainActor public func removeAllListeners(of object: AnyObject) {
-        for var (_, v) in listeners {
-            v.remove(ListenerObject(object))
+        for key in listeners.keys {
+            self.listeners[key]?.remove(ListenerObject(object))
         }
     }
     
